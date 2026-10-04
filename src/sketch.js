@@ -53,11 +53,18 @@ export const sketch = (p) => {
 
     // p.noStroke();
 
-    const radius = 40;
+    const radius = 30;
     for (let y = 0, ySteps = 8; y < ySteps; y++) {
       for (let x = 0, max = 8; x < max; x++) {
-        const step = PARAMS.width / max;
-        const drop = new Drop(p, y * step, PARAMS.height * 0.5 + x, radius, p.color(255, 100, 64));
+        const step = (PARAMS.width * 0.8) / max;
+        const drop = new Drop(
+          p,
+          (x + 1) * step + PARAMS.width * 0.05,
+          // PARAMS.height * 0.5,
+          PARAMS.height * 0.5 + Math.sin((x / (max - 1)) * p.TWO_PI) * 4 * radius,
+          radius,
+          p.color(255, 100, 64)
+        );
         for (let other of drops) {
           other.marble(drop);
         }
